@@ -1,18 +1,109 @@
 package com.atguigu.test;
 
-import static org.junit.Assert.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
+import com.atguigu.bean.Book;
+import com.atguigu.bean.Car;
 import com.atguigu.bean.Person;
+
 
 
 public class IOCTest {
 	
-	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
+//	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
+	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc2.xml");
+
+//--------------------------------------------------------------	
+	
+	/**
+	 * 实验4：正确的为各种属性赋值
+	 * 			测试使用null值 、默认引用类型就是null；基本类型是默认值
+	 */
+	
+	@Test
+	public void test05() {
+		Person person03 = (Person) ioc.getBean("person03");
+		Map<String, Object> maps = person03.getMaps();
+		System.out.println(maps);
+		
+//		Object bean = ioc.getBean("myMap");
+		Map<String, Object> bean = (Map<String, Object>) ioc.getBean("myMap");
+		System.out.println(bean.getClass());
+		
+	}
+	
+	@Test
+	public void test04() {
+		// TODO Auto-generated method stub
+		Person person01 = (Person) ioc.getBean("person01");			
+		Person person02 = (Person) ioc.getBean("person02");	
+		
+		Car car = person01.getCar();
+		System.out.println(car);
+		
+		
+		List<Book> books = person02.getBooks();
+		System.out.println(books);
+		
+		System.out.println("-------------");
+		
+		Map<String, Object> maps = person02.getMaps();
+		System.out.println(maps);
+		System.out.println(person02.getProperties());
+		
+		
+		/**
+		 * 内部bean是不能用id获取的		
+		 * org.springframework.beans.factory.NoSuchBeanDefinitionException: 
+		 * No bean named 'carInner' is defined
+		 */
+		//内部bean不能被ioc直接获取到，只能内部使用
+		try {
+			Object bean = ioc.getBean("carInner");
+			System.out.println(bean);	
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("No bean named 'carInner' is defined");
+		}
+		
+/*		
+		org.springframework.beans.factory.BeanCreationException: 
+			Error creating bean with name 'person02' defined in class path resource [ioc2.xml]: 
+			Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: 
+			Failed to convert property value of type 'java.util.LinkedHashMap' to required type 'com.sun.javafx.collections.MappingChange$Map' for property 'maps'; nested exception is java.lang.IllegalStateException: 
+			Cannot convert value of type [java.util.LinkedHashMap] to required type [com.sun.javafx.collections.MappingChange$Map] for property 'maps': no matching editors or conversion strategy found
+*/
+
+	}
+	
+	
+	@Test
+	public void test03() {
+		// TODO Auto-generated method stub
+/*		Object bean = ioc.getBean("person01");
+		System.out.println(bean);*/
+		
+		Person bean = (Person) ioc.getBean("person01");
+		System.out.println(bean.getLastName() == null);
+		System.out.println("person的car "+bean.getCar());
+		Car bean2 = (Car) ioc.getBean("car01");
+		bean2.setCarName("凯迪拉克");		
+		
+		System.out.println("我修改了容器car，你的car变了没？ "+bean.getCar());		
+		Car car = bean.getCar();
+//		Object bean2 = ioc.getBean("car01");
+		System.out.println(bean2==car);
+
+	}
+	
+	
 	
 //--------------------------------------------------------------	
 	

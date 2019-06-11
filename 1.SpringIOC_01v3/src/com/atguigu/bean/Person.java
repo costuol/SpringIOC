@@ -1,15 +1,15 @@
 package com.atguigu.bean;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
-import com.sun.javafx.collections.MappingChange.Map;
-import com.sun.xml.internal.fastinfoset.sax.Properties;
 
 public class Person {
 	
 	//基本类型直接使用
 	//<property name="lastName" value="张三"></property>自动进行类型转换
-	private String lastName;
+	private String lastName = "小明";
 	private Integer age;
 	private String gender;
 	private String email;
