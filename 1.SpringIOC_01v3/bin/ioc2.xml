@@ -114,4 +114,31 @@
 		<ref bean="myMap"/>
 	</util:list>
 	
+	<!-- 级联属性赋值：级联属性：属性的属性 -->
+	<bean id="person04" class="com.atguigu.bean.Person">
+		<!-- 为car赋值的时候，改变car的价格 -->
+		<property name="car" ref="car01"></property>
+		<!--  -->
+		<property name="car.price" value="90000"></property>
+	</bean>
+		
+	<!-- 
+		实验6：通过继承实现bean配置信息的重用(测试)
+		实验7：通过abstract属性创建一个模板bean
+		实验8：bean之间的依赖
+		实验9：测试bean的作用域，分别创建单实例和多实例的bean★（测试）
+	-->
+	<!-- abstract="true" 这个bean的配置是一个抽象的，不能获取他的实例，只能被别人用来继承 -->
+
+	<bean id="person05" class="com.atguigu.bean.Person" abstract="true">
+		<property name="lastName" value="张三"></property>
+		<property name="age" value="18"></property>
+		<property name="email" value="zhangsan@atguigu.com"></property>
+		<property name="gender" value="男"></property>
+	</bean>
+	<!-- parent指定当前bean的配置信息继承于哪个 -->
+	<bean id="person06" parent="person05"><!-- person06继承于person05，class可以省略 -->
+		<property name="lastName" value="李四"></property>
+
+	</bean>
 </beans>

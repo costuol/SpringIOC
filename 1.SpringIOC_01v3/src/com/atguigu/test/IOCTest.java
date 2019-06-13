@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,16 +18,82 @@ import com.atguigu.bean.Person;
 
 public class IOCTest {
 	
-//	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
-	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc2.xml");
+//--------------------------------------------------------------
+	
+	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc3.xml");
+	
+	@Test
+	public void test10() {
+		// TODO Auto-generated method stub
+  		Object bean = ioc.getBean("myFactoryBeanImple");
+		System.out.println(bean);
 
+	}	
+	
+	@Test
+	public void test09() {
+		// TODO Auto-generated method stub
+  		Object bean = ioc.getBean("airPlane01");
+  		Object bean2 = ioc.getBean("airPlane02");
+		System.out.println(bean);
+		System.out.println(bean2);
+		System.out.println("容器启动完成");
+	}	
+	
+	
+	@Test
+	public void test08() {
+		// TODO Auto-generated method stub
+		System.out.println("容器启动完成");
+		
+  		Object bean = ioc.getBean("book");
+		Object bean2 = ioc.getBean("book");
+		System.out.println(bean == bean2);
+	}
+	
 //--------------------------------------------------------------	
 	
+	
+//	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc2.xml");		
+	
+
+/*	实验6：通过继承实现bean配置信息的重用(测试)
+	实验7：通过abstract属性创建一个模板bean*/
+	
+	@Test
+	public void test07() {
+//		Person person05 = (Person) ioc.getBean("person05");
+/*		org.springframework.beans.factory.BeanIsAbstractException: 
+		Error creating bean with name 'person05': 
+		Bean definition is abstract*/
+
+		Person person06 = (Person) ioc.getBean("person06");
+		System.out.println("person06："+person06);
+	}	
+	
+	
+	/**
+	 * 级联属性可以修改属性的属性，注意：原来bean的值可能会被修改
+	 */
+	@Test
+	public void test06() {
+		Person person04 = (Person) ioc.getBean("person04");
+		Object car = ioc.getBean("car01");
+		System.out.println("容器中的car："+car);
+		System.out.println("person中的car："+person04.getCar());
+		
+	}
+	
+	
+	
+//--------------------------------------------------------------	
+	
+
 	/**
 	 * 实验4：正确的为各种属性赋值
 	 * 			测试使用null值 、默认引用类型就是null；基本类型是默认值
 	 */
-	
+
 	@Test
 	public void test05() {
 		Person person03 = (Person) ioc.getBean("person03");
@@ -154,6 +221,8 @@ public class IOCTest {
 	
 //--------------------------------------------------------------
 	
+	
+//	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
 	/**
 	 * 从容器中拿到这个组件
 	 */

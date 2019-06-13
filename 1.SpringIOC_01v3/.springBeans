@@ -9,6 +9,7 @@
 	<configs>
 		<config>conf/ioc.xml</config>
 		<config>conf/ioc2.xml</config>
+		<config>conf/ioc3.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

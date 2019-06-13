@@ -5,6 +5,15 @@ public class Car {
 	private String carName;
 	private Integer price;
 	private String colour;
+	
+		
+	public Car() {
+		super();
+		// TODO Auto-generated constructor stub
+		System.out.println("car被创建……");
+	}
+	
+	
 	public String getCarName() {
 		return carName;
 	}

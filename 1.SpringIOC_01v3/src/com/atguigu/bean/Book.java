@@ -4,6 +4,13 @@ public class Book {
 
 	private String bookName;
 	private String author;
+	
+	
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
+		System.out.println("book被创建……");
+	}
 	public String getBookName() {
 		return bookName;
 	}
