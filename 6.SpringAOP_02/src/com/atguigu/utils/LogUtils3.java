@@ -15,6 +15,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.atguigu.impl.MyMathCalculator3;
@@ -26,6 +27,7 @@ import com.atguigu.impl.MyMathCalculator3;
  */
 @Aspect//告诉Spring这是一个切面类
 @Component
+@Order(1)//使用order改变切面执行顺序
 public class LogUtils3 {
 	
 	/**
